@@ -2,15 +2,24 @@
 
 A robust Node.js application demonstrating process management, resource limiting, and inter-process communication using Hono server.
 
-## Features
+## How does it work?
 
-- Child process creation and management
-- Inter-process communication (IPC)
-- Memory usage limiting
-- Process cleanup and error handling
-- RESTful API endpoints
-- Asynchronous process execution
-- Comprehensive response collection
+```mermaid
+flowchart TD
+    A[Start Server] --> B[Receive Request]
+    B --> C{Create Child Process}
+    C -->|Success| D[Send START Message]
+    C -->|Error| E[Handle Error]
+    D --> F[Child Process Execution]
+    F --> G[Send Messages to Parent]
+    G --> H{Check Message}
+    H -->|DONE| I[Terminate Child Process]
+    H -->|Other| J[Collect Message]
+    J --> H
+    I --> K[Send Response to Client]
+    E --> K
+    K --> L[End]
+```
 
 ## Installation
 
